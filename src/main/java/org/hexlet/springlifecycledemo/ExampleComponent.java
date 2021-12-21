@@ -3,22 +3,12 @@ package org.hexlet.springlifecycledemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 @Component("example-bean")
 public class ExampleComponent {
     @Autowired
     private ExampleAutowiredBean exampleAutowiredBean;
-    private String exampleValue;
-
-    public String getExampleValue() {
-        return exampleValue;
-    }
-
-    public void setExampleValue(String exampleValue) {
-        this.exampleValue = exampleValue;
-    }
+    @RandomValue(min = 50, max = 60)
+    private Integer exampleValue;
 
     public ExampleAutowiredBean getExampleAutowiredBean() {
         return exampleAutowiredBean;
@@ -28,13 +18,11 @@ public class ExampleComponent {
         this.exampleAutowiredBean = exampleAutowiredBean;
     }
 
-    @PostConstruct
-    public void init() {
-        System.out.println("[init] " + this.getClass().getName());
+    public Integer getExampleValue() {
+        return exampleValue;
     }
 
-    @PreDestroy
-    public void destroy() {
-
+    public void setExampleValue(Integer exampleValue) {
+        this.exampleValue = exampleValue;
     }
 }
